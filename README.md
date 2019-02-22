@@ -1,5 +1,5 @@
 # kkshortcut
-linux directory shortcuts, for easy navigation of file directories.
+linux directory shortcuts, for easy navigation of directories.
 
 ```
 == inistallation
