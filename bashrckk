@@ -1,0 +1,70 @@
+#!/usr/bin/bash
+#
+# == command list:
+# kk -- change dir
+# kka -- assign a shortcut to a dir
+# kkd -- delete a shortcut
+# kkl -- list shortcuts
+# kkg -- search shortcuts
+# kkv -- set environment variables for shortcuts
+# kku -- unset the environment variables
+# 
+# == examples
+# kka aa # assigns shortcut 'aa' to the current dir.
+# kk aa  # cd to the dir represented by shortcut 'aa'.
+# kkl    # list all shortcuts
+# kkl m s # list shortcuts whose first letter is from 'm' to 's'
+# kkg home # search shortcuts whose dirs contain 'home'
+# kkv aa  # assign an environment variable kkaa whose value is the dir path.
+# cp myFile $kkaa # cp myFile to the dir represented by shortcut aa
+# kku aa # unset the environment variable kkaa.
+#
+#
+# The kk system needs only 1 file: kkcmd
+
+export KKDIR=${KKDIR:-$HOME/.kkdir}
+
+# cd to an entry
+kk() {
+  t1=`kkcmd -c $1`
+  echo "cd $t1"
+  cd $t1
+}
+
+# assign an entry
+kka() {
+  kkcmd $*
+}
+
+kkl() {
+  kkcmd -l $*
+}
+
+# delete an entry
+kkd() {
+  kkcmd -d $1
+}
+
+# assign shell variables
+kkv() {
+  kkcmd -v $* 
+  . $KKDIR/temp_k2
+}
+
+# unset shell variables. Not implemented yet.
+kku() {
+  kkcmd -u $*
+  . $KKDIR/temp_k2
+}
+
+# list grep entries
+kkg() {
+  if [ $# -ge 1 ]; then
+    grep -i --color=always $1 $KKDIR/temp_k
+  fi
+}
+
+# edit entries
+alias kke="vi $KKDIR/temp_k"
+
+

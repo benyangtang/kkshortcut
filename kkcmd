@@ -1,0 +1,217 @@
+#!/usr/bin/python
+# vim: set syntax=python:
+import os,sys, getopt, string
+
+#=== parameters_
+#=== def_mygetcwd()
+#=== command_arg
+#=== read_temp_k
+#== list__
+#=== get_the_keyName and KeyDir
+#=== isEnv_
+
+#=== parameters_
+kkDir = os.environ['KKDIR']
+temp_kFile = '%s/temp_k' %(kkDir)
+temp_k2File = '%s/temp_k2' %(kkDir)
+
+width1 = 10
+
+#=== def_mygetcwd()
+def mygetcwd():
+  t1 = 'pwd'
+  return os.popen(t1,'r').read()[:-1]
+
+#=== command_arg
+optStr = 'ciduvl'
+try:
+  opts, args1 = getopt.getopt(sys.argv[1:],optStr)
+except getopt.error, msg:
+  print 'wrong options. exiting.'
+  sys.exit(1)
+
+isDelete = 0
+isEnv = 0
+isInit = 0
+isList = 0
+isCd = 0
+for o,a in opts:
+  if o=='-d':
+    isDelete = 1
+  if o=='-v':
+    isEnv = 1
+  if o=='-u':
+    isEnv = 2
+  if o=='-i':
+    isInit = 1
+  if o=='-l':
+    isList = 1
+  if o=='-c':
+    isCd = 1
+
+#=== read_temp_k
+try:
+  lines = open(temp_kFile).readlines()
+  if lines[-1] == '\n':
+    del lines[-1]
+
+except: # initialize the kk system
+  print 'initialize the kk file.'
+  if not os.path.isdir(kkDir): 
+    os.mkdir(kkDir) 
+  if not os.path.isfile(temp_kFile): 
+    os.system('touch %s' %(temp_kFile))
+  lines = []
+
+#== list__
+if isList:
+  if len(args1)==0:
+    myNum1 = '0'
+    myNum2 = 'z'
+  else:
+    myNum1 = args1[0]
+
+  if len(args1)==1:
+    myNum2 = myNum1
+  elif len(args1)==2:
+    myNum2 = args1[1]
+
+  len1 = len(myNum1)
+  len2 = len(myNum2)
+
+  #=== list lines
+  dashes = '-'*width1
+  dots = '.'*width1
+  print ''
+  for line in lines:
+    temp1 = string.split(line)
+    kkName = temp1[0]
+    kkDir = temp1[1]
+    if kkName[:len1]>=myNum1 and kkName[:len2]<=myNum2:
+      if kkDir[-1]=='/':
+        kkName1 = kkName + ' ' + dashes[:(width1-len(kkName)-1)]
+        print '%s %s' %(kkName1,kkDir)
+      else:
+        kkName1 = kkName + ' ' + dots[:(width1-len(kkName)-1)]
+        print '%s %s' %(kkName1,kkDir)
+  print ' '
+
+  sys.exit(0)
+  # end of kk -l
+
+#=== get_the_keyName and KeyDir
+myNum = None
+if len(args1)>0:
+  myNum = args1[0]
+  if len(myNum)>10:
+    myNum = myNum[:10]
+
+file0 = None
+if len(args1)>1:
+  file0 = args1[1]
+
+#=== isCd_
+if isCd:
+  #=== which one matches
+  i2 = None
+  for i in range(len(lines)):
+    temp1 = string.split(lines[i])
+  # print temp1
+    if temp1[0]==myNum:
+      i2 = i
+      dir1 = temp1[1]
+
+  if type(i2)==type(None):
+    print 'Dir shortcut %s does not exit. Please check.' %(myNum)
+    sys.exit()
+
+  #=== write to temp_k1File
+  print dir1
+
+  sys.exit(0)
+  # end of kk -c
+   
+#=== isEnv_
+if isEnv:
+  letterDigit = 'abcdefghijklmnopqrstuvwxyz0123456789_'
+
+  lines1 = []
+  for line in lines:
+    temp1 = string.split(line);
+    kName = temp1[0]
+
+    isCheckName = 1
+    if myNum is None or kName==myNum:
+      #--- No symbols (.,#$%, etc) are allowed in env names
+      isName = 1
+      for i in string.lower(kName):
+        if not i in letterDigit:
+          isName = 0
+          break
+
+      #--- make line of variable setting
+      if isName:
+        if isEnv==1:
+          kDir = temp1[1]
+          if kDir[-1]=='/': kDir = kDir[:-1]
+          temp2 = "kk%s='%s'\n" %(temp1[0], kDir)
+        # for unset the variable
+        else:
+          temp2 = "unset kk%s\n" %(temp1[0])
+        lines1.append(temp2)
+
+  if lines1:
+    print '\nWill run the following shell variables:'
+    for line in lines1:
+      print line,
+    print '' 
+
+  else:
+    lines1 = 'echo "Nothing to be set"'
+
+#--- write to a file to be executed
+  open(temp_k2File,'w').writelines(lines1)
+  sys.exit(0)
+  
+#=== Does myNum already exist?
+i2 = None
+for i in range(len(lines)):
+  temp1 = string.split(lines[i])
+  if temp1[0]==myNum:
+    if isDelete:
+      i2 = i
+      del lines[i2]
+      open(temp_kFile,'w').writelines(lines)
+      sys.exit(0)
+
+    i2 = i
+    break
+
+if type(i2)==type(None):
+  lines.append('')
+  i2 = len(lines)-1
+
+#=== the line in temp_k
+if file0:
+  kLine = '%s  %s\n' %(string.ljust(myNum,width1), mygetcwd() + '/' + file0)
+else:
+  kLine = '%s  %s\n' %(string.ljust(myNum,width1), mygetcwd() + '/')
+
+print 'kName assigned: \n%s' %(kLine)
+lines[i2] = kLine
+
+#=== backup temp_k
+fn = temp_kFile + '.bak'
+isBackup = 0
+if not os.path.isfile(fn):
+  isBackup = 1
+elif (os.path.getmtime(temp_kFile) -  os.path.getmtime(fn)) > 24*3600:
+  isBackup = 1
+
+if isBackup:
+  import shutil
+  shutil.copyfile(temp_kFile, fn)
+
+#=== write temp_k
+lines.sort()
+open(temp_kFile,'w').writelines(lines)
