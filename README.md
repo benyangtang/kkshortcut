@@ -24,9 +24,9 @@ kku -- unset the environment variables
 == Examples
 # Suppose you are in your home directory /home/myname
 mkdir -p aazz/bbzz/cczz/ddzz/eezz
-cd aazz/bbzz/cczz
 
 #-- assign shortcuts and navigate
+cd aazz/bbzz/cczz
 kka cc    # assigns shortcut 'cc' to /home/myname/aazz/bbzz/cczz
 cd ddzz/eezz
 kka aa    # assign shortcut 'aa' to /home/myname/aazz/bbzz/cczz/ddzz/eezz
