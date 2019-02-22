@@ -2,6 +2,8 @@
 # vim: set syntax=python:
 import os,sys, getopt, string
 
+
+#== credit__
 #=== parameters_
 #=== def_mygetcwd()
 #=== command_arg
@@ -9,6 +11,14 @@ import os,sys, getopt, string
 #== list__
 #=== get_the_keyName and KeyDir
 #=== isEnv_
+
+#== credit__
+# Created by benyang tang
+# Requirements:
+#   python
+#   aria2c
+# Feb 2019
+#
 
 #=== parameters_
 kkDir = os.environ['KKDIR']
