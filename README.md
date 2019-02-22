@@ -27,20 +27,20 @@ mkdir -p aazz/bbzz/cczz/ddzz/eezz
 cd aazz/bbzz/cczz
 
 #-- assign shortcuts and navigate
-kka cc # assigns shortcut 'cc' to /home/myname/aazz/bbzz/cczz
+kka cc    # assigns shortcut 'cc' to /home/myname/aazz/bbzz/cczz
 cd ddzz/eezz
-kka aa  # assign shortcut 'aa' to /home/myname/aazz/bbzz/cczz/ddzz/eezz
-kk cc  # change to directory /home/myname/aazz/bbzz/cczz
-kk aa  # change to directory /home/myname/aazz/bbzz/cczz/ddzz/eezz
+kka aa    # assign shortcut 'aa' to /home/myname/aazz/bbzz/cczz/ddzz/eezz
+kk cc     # change to directory /home/myname/aazz/bbzz/cczz
+kk aa     # change to directory /home/myname/aazz/bbzz/cczz/ddzz/eezz
 
 #-- list and search shortcuts
-kkl    # list all shortcuts
-kkl a c # list shortcuts whose first letter is from 'a' to 'c'
-kkg ee # search shortcuts whose dirs contain 'ee'
+kkl       # list all shortcuts
+kkl a c   # list shortcuts whose first letter is from 'a' to 'c'
+kkg ee    # search shortcuts whose dirs contain 'ee'
 
 #-- use environment variables
-kkv aa  # assign an environment variable kkaa whose value is the dir path.
+kkv aa    # assign an environment variable kkaa whose value is the dir path.
 cp myFile $kkaa # copy myFile to the dir represented by the shortcut aa
-kku aa # unset the environment variable kkaa.
+kku aa    # unset the environment variable kkaa.
 ```
 
