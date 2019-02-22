@@ -4,7 +4,7 @@ linux directory shortcuts, for easy navigation of directories.
 ```
 == inistallation
 Pretty easy. 
-1. Put the file kkcmd into a directory in command PATH, e.g., /usr/bin, or $HOME/bin.
+1. Put the file kkcmd into a directory in command path, e.g., /usr/bin, or $HOME/bin.
 2. Source the file bashrckk. You can put this into the bash initialization source:
 echo '. bashrckk' >> .bashrc
 
