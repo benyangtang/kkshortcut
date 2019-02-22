@@ -1,6 +1,7 @@
 # kkshortcut
 linux directory shortcuts, for easy navigation of file directories.
 
+```
 == inistallation
 Pretty easy. 
 1. Put the file kkcmd into a directory in command PATH, e.g., /usr/bin, or $HOME/bin.
@@ -31,5 +32,5 @@ kkg ee # search shortcuts whose dirs contain 'ee'
 kkv aa  # assign an environment variable kkaa whose value is the dir path.
 cp myFile $kkaa # copy myFile to the dir represented by the shortcut aa
 kku aa # unset the environment variable kkaa.
-
+```
 
