@@ -27,11 +27,15 @@ mkdir -p aazz/bbzz/cczz/ddzz/eezz
 
 #-- assign shortcuts and navigate
 cd aazz/bbzz/cczz
-kka cc    # assigns shortcut 'cc' to /home/myname/aazz/bbzz/cczz
+kka cc    # assigns shortcut 'cc' to the current dir (/home/myname/aazz/bbzz/cczz)
 cd ddzz/eezz
-kka aa    # assign shortcut 'aa' to /home/myname/aazz/bbzz/cczz/ddzz/eezz
+kka aa    # assign shortcut 'aa' to the current dir (/home/myname/aazz/bbzz/cczz/ddzz/eezz)
 kk cc     # change to directory /home/myname/aazz/bbzz/cczz
+cd /usr/lib/X11
+kka x     # assign shortcut 'x' to /usr/lib/X11
 kk aa     # change to directory /home/myname/aazz/bbzz/cczz/ddzz/eezz
+kk x      # change to directory /usr/lib/X11
+kkd cc    # remove shortcut 'cc'
 
 #-- list and search shortcuts
 kkl       # list all shortcuts
