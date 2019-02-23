@@ -129,16 +129,13 @@ if isCd:
   # print temp1
     if temp1[0]==myNum:
       i2 = i
-      dir1 = temp1[1]
+      print temp1[1]
+      sys.exit(0)
 
   if type(i2)==type(None):
-    print 'Dir shortcut %s does not exit. Please check.' %(myNum)
-    sys.exit()
-
-  #=== write to temp_k1File
-  print dir1
-
-  sys.exit(0)
+    #print 'Dir shortcut %s does not exit. Please check.' %(myNum)
+    print ' .'
+    sys.exit(1)
   # end of kk -c
    
 #=== isEnv_
