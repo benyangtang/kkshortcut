@@ -33,7 +33,7 @@ def mygetcwd():
   return os.popen(t1,'r').read()[:-1]
 
 #=== command_arg
-optStr = 'ciduvl'
+optStr = 'cduvl'
 try:
   opts, args1 = getopt.getopt(sys.argv[1:],optStr)
 except getopt.error, msg:
@@ -42,7 +42,6 @@ except getopt.error, msg:
 
 isDelete = 0
 isEnv = 0
-isInit = 0
 isList = 0
 isCd = 0
 for o,a in opts:
@@ -52,8 +51,6 @@ for o,a in opts:
     isEnv = 1
   if o=='-u':
     isEnv = 2
-  if o=='-i':
-    isInit = 1
   if o=='-l':
     isList = 1
   if o=='-c':
@@ -67,6 +64,7 @@ try:
 
 except: # initialize the kk system
   print 'initialize the kk file.'
+  print temp_kFile
   if not os.path.isdir(kkDir): 
     os.mkdir(kkDir) 
   if not os.path.isfile(temp_kFile): 
