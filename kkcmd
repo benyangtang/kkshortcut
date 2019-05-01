@@ -36,8 +36,8 @@ def mygetcwd():
 optStr = 'cduvl'
 try:
   opts, args1 = getopt.getopt(sys.argv[1:],optStr)
-except getopt.error, msg:
-  print 'wrong options. exiting.'
+except getopt.error as msg:
+  print('wrong options. exiting.')
   sys.exit(1)
 
 isDelete = 0
@@ -63,8 +63,8 @@ try:
     del lines[-1]
 
 except: # initialize the kk system
-  print 'initialize the kk file.'
-  print temp_kFile
+  print('initialize the kk file.')
+  print(temp_kFile)
   if not os.path.isdir(kkDir): 
     os.mkdir(kkDir) 
   if not os.path.isfile(temp_kFile): 
@@ -90,7 +90,7 @@ if isList:
   #=== list lines
   dashes = '-'*width1
   dots = '.'*width1
-  print ''
+  print('')
   for line in lines:
     temp1 = string.split(line)
     kkName = temp1[0]
@@ -98,11 +98,11 @@ if isList:
     if kkName[:len1]>=myNum1 and kkName[:len2]<=myNum2:
       if kkDir[-1]=='/':
         kkName1 = kkName + ' ' + dashes[:(width1-len(kkName)-1)]
-        print '%s %s' %(kkName1,kkDir)
+        print('%s %s' %(kkName1,kkDir))
       else:
         kkName1 = kkName + ' ' + dots[:(width1-len(kkName)-1)]
-        print '%s %s' %(kkName1,kkDir)
-  print ' '
+        print('%s %s' %(kkName1,kkDir))
+  print(' ')
 
   sys.exit(0)
   # end of kk -l
@@ -124,15 +124,15 @@ if isCd:
   i2 = None
   for i in range(len(lines)):
     temp1 = string.split(lines[i])
-  # print temp1
+  # print(temp1)
     if temp1[0]==myNum:
       i2 = i
-      print temp1[1]
+      print(temp1[1])
       sys.exit(0)
 
   if type(i2)==type(None):
-    #print 'Dir shortcut %s does not exit. Please check.' %(myNum)
-    print ' .'
+    #print('Dir shortcut %s does not exit. Please check.' %(myNum))
+    print(' .')
     sys.exit(1)
   # end of kk -c
    
@@ -166,10 +166,10 @@ if isEnv:
         lines1.append(temp2)
 
   if lines1:
-    print '\nWill run the following shell variables:'
+    print('\nWill run the following shell variables:')
     for line in lines1:
-      print line,
-    print '' 
+      print(line),
+    print('' )
 
   else:
     lines1 = 'echo "Nothing to be set"'
@@ -202,7 +202,7 @@ if file0:
 else:
   kLine = '%s  %s\n' %(string.ljust(myNum,width1), mygetcwd() + '/')
 
-print 'kName assigned: \n%s' %(kLine)
+print('kName assigned: \n%s' %(kLine))
 lines[i2] = kLine
 
 #=== backup temp_k
