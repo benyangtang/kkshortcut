@@ -2,7 +2,7 @@
 #!/usr/bin/python
 # vim: set syntax=python:
 from __future__ import print_function
-import os,sys, getopt, string
+import os,sys, getopt
 
 
 #== credit__
@@ -94,7 +94,7 @@ if isList:
   dots = '.'*width1
   print('')
   for line in lines:
-    temp1 = string.split(line)
+    temp1 = str.split(line)
     kkName = temp1[0]
     kkDir = temp1[1]
     if kkName[:len1]>=myNum1 and kkName[:len2]<=myNum2:
@@ -125,7 +125,7 @@ if isCd:
   #=== which one matches
   i2 = None
   for i in range(len(lines)):
-    temp1 = string.split(lines[i])
+    temp1 = str.split(lines[i])
   # print(temp1)
     if temp1[0]==myNum:
       i2 = i
@@ -144,14 +144,14 @@ if isEnv:
 
   lines1 = []
   for line in lines:
-    temp1 = string.split(line);
+    temp1 = str.split(line);
     kName = temp1[0]
 
     isCheckName = 1
     if myNum is None or kName==myNum:
       #--- No symbols (.,#$%, etc) are allowed in env names
       isName = 1
-      for i in string.lower(kName):
+      for i in str.lower(kName):
         if not i in letterDigit:
           isName = 0
           break
@@ -183,7 +183,7 @@ if isEnv:
 #=== Does myNum already exist?
 i2 = None
 for i in range(len(lines)):
-  temp1 = string.split(lines[i])
+  temp1 = str.split(lines[i])
   if temp1[0]==myNum:
     if isDelete:
       i2 = i
