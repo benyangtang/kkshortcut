@@ -200,9 +200,9 @@ if type(i2)==type(None):
 
 #=== the line in temp_k
 if file0:
-  kLine = '%s  %s\n' %(string.ljust(myNum,width1), mygetcwd() + '/' + file0)
+  kLine = '%s  %s\n' %(str.ljust(myNum,width1), mygetcwd() + '/' + file0)
 else:
-  kLine = '%s  %s\n' %(string.ljust(myNum,width1), mygetcwd() + '/')
+  kLine = '%s  %s\n' %(str.ljust(myNum,width1), mygetcwd() + '/')
 
 print(('kName assigned: \n%s' %(kLine)))
 lines[i2] = kLine
