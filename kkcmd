@@ -1,5 +1,7 @@
 #!/usr/bin/python
+#!/usr/bin/python
 # vim: set syntax=python:
+from __future__ import print_function
 import os,sys, getopt, string
 
 
@@ -98,10 +100,10 @@ if isList:
     if kkName[:len1]>=myNum1 and kkName[:len2]<=myNum2:
       if kkDir[-1]=='/':
         kkName1 = kkName + ' ' + dashes[:(width1-len(kkName)-1)]
-        print('%s %s' %(kkName1,kkDir))
+        print(('%s %s' %(kkName1,kkDir)))
       else:
         kkName1 = kkName + ' ' + dots[:(width1-len(kkName)-1)]
-        print('%s %s' %(kkName1,kkDir))
+        print(('%s %s' %(kkName1,kkDir)))
   print(' ')
 
   sys.exit(0)
@@ -127,7 +129,7 @@ if isCd:
   # print(temp1)
     if temp1[0]==myNum:
       i2 = i
-      print(temp1[1])
+      print((temp1[1]))
       sys.exit(0)
 
   if type(i2)==type(None):
@@ -168,7 +170,7 @@ if isEnv:
   if lines1:
     print('\nWill run the following shell variables:')
     for line in lines1:
-      print(line),
+      print(line, end=' ')
     print('' )
 
   else:
@@ -202,7 +204,7 @@ if file0:
 else:
   kLine = '%s  %s\n' %(string.ljust(myNum,width1), mygetcwd() + '/')
 
-print('kName assigned: \n%s' %(kLine))
+print(('kName assigned: \n%s' %(kLine)))
 lines[i2] = kLine
 
 #=== backup temp_k
